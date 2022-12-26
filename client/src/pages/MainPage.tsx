@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Hero } from "../components/Hero/Hero";
+import { Hero } from "../components/landing/landing-start/Hero";
 import style from '../style/MainPage.module.scss'
 import iHero from '../assets/logo.jpg'
 import i1 from '../assets/1.jpg'
@@ -11,7 +11,7 @@ import i6 from '../assets/6.jpg'
 import i7 from '../assets/7.jpg'
 import i8 from '../assets/8.jpg'
 import i9 from '../assets/10.jpg'
-import { ItemImg } from "../components/item-img/ItemImg";
+import { ItemImg } from "../components/landing/item-img/ItemImg";
 
 
 
