@@ -1,0 +1,11 @@
+@import '../../style/color.scss';
+
+.container {
+    height: $toolbar-height;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 4px 5px gray;
+    top: calc($toolbar-height + 50px);
+}

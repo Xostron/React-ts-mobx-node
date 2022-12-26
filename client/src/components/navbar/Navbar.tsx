@@ -17,6 +17,7 @@ export const Navbar: FC = () => {
 
     const links: ILink[] = [
         { name: 'Story', to: '/', disabled: false },
+        { name: 'Paint', to: '/paint', disabled: false },
         { name: 'About', to: '/about', disabled: false }
     ]
 

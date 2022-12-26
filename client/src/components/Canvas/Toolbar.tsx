@@ -1,4 +1,4 @@
-import style from './Canvas.module.scss'
+import style from './Toolbar.module.scss'
 import React, { FC } from 'react'
 
 export const Toolbar: FC = () => {

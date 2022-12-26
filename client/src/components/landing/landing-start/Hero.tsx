@@ -11,7 +11,7 @@ export const Hero: FC<IHero> = ({ img }) => {
         <div className={style.container}>
             <img src={img} alt="logo" className={style.image} />
             <h1 className={style.title}>
-                {/* God of war: Ragnarok */}
+                Ragnarok
             </h1>
         </div>
     )

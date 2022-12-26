@@ -1,11 +1,23 @@
 @import './style/color.scss';
 @import './style/layout.scss';
 
-* {
+html,
+body {
     box-sizing: border-box;
-    padding: 0;
+    min-height: 100vh;
     margin: 0;
+    padding: 0;
 }
+
+// * {
+//     box-sizing: border-box;
+//     padding: 0;
+//     margin: 0;
+//     font-family: 'Montserrat', sans-serif;
+// }
+
+
+
 
 /***************** CUSTOM SCROLL ***********************/
 /* ширина scrollbar */
