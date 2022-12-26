@@ -1,0 +1,29 @@
+@import './style/color.scss';
+@import './style/layout.scss';
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/***************** CUSTOM SCROLL ***********************/
+/* ширина scrollbar */
+body::-webkit-scrollbar {
+    width: .3rem;
+}
+
+/* цвет дорожки */
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    /* background-color: #f9f9fd; */
+    border-radius: 0px;
+}
+
+body::-webkit-scrollbar-thumb {
+    /* закругления плашки */
+    border-radius: 10px;
+    /* цвет плашки */
+    background: linear-gradient(180deg, $hide-text-color, $dark-background-color);
+    /* border: 3px solid orange; */
+}

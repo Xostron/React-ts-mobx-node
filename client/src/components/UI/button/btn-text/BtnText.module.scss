@@ -1,0 +1,29 @@
+@import '../../../../style/color.scss';
+@import '../../../../style/layout.scss';
+
+.container {
+    outline: none;
+    border: 1px solid $ui-color;
+    background-color: transparent;
+    border-radius: .5rem;
+    padding: .4rem;
+    cursor: pointer;
+    color: $ui-color;
+    transition-property: font-color, background-color;
+    transition: .4s ease-in-out;
+    width: 100px;
+    font-size: .9rem;
+
+    &[color='gray'] {
+        background-color: #5252529c;
+    }
+
+    &[color='green'] {
+        background-color: #1ed75f94;
+    }
+
+    &:hover {
+        color: $ui-color;
+        background-color: $background-color;
+    }
+}

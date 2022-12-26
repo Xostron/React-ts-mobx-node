@@ -1,0 +1,27 @@
+@import '../../../../style/color.scss';
+@import '../../../../style/layout.scss';
+
+
+
+
+.myInput {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    outline: none;
+    padding: .4rem;
+    color: $regular-text-color;
+    background-color: transparent;
+    font-size: 1rem;
+    border: 1px solid $hide-text-color;
+    border-radius: 10px;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    &::placeholder {
+        color: $hide-text-color;
+    }
+}

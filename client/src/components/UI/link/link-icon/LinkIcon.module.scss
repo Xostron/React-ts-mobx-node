@@ -1,0 +1,39 @@
+@import '../../../../style/color.scss';
+@import '../../../../style/layout.scss';
+
+.myLink {
+    display: flex;
+    text-decoration: none;
+    cursor: pointer;
+    align-items: center;
+    color: $ui-color;
+    font-size: 1.15rem;
+    opacity: .5;
+
+    .navText {
+        margin-left: 8px;
+    }
+
+    .navIcon {
+        fill: $dark-background-color;
+    }
+
+    &:hover {
+        transition: color, fill .4s ease-in-out;
+        color: $ui-color;
+        opacity: .75;
+
+        .navIcon {
+            fill: $bold-text-color;
+        }
+    }
+}
+
+.myLink.active {
+    color: $ui-color;
+    opacity: 1;
+
+    .navIcon {
+        fill: $ui-color;
+    }
+}

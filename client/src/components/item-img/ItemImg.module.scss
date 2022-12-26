@@ -1,0 +1,47 @@
+@import '../../style/color.scss';
+
+.container {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    opacity: 0;
+    transform: scale(85%);
+    transition: 2s;
+
+    &.zoom {
+        opacity: 1;
+        transform: scale(100%);
+        transition: 2s;
+    }
+
+    .image {
+        width: 60%;
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+
+        .title {
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width:800px) {
+    .container {
+        flex-direction: column;
+        background-color: rgb(49, 49, 49);
+
+        .image {
+            width: 100%;
+        }
+    }
+
+
+}
