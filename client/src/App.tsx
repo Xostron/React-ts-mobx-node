@@ -5,7 +5,7 @@ import { Navbar } from './components/navbar/Navbar';
 
 function App() {
   return (
-    <>
+    <div >
       <Navbar />
       <Suspense fallback={<>Loading...</>}>
         <Routes>
@@ -17,7 +17,7 @@ function App() {
           })}
         </Routes>
       </Suspense>
-    </>
+    </div>
   );
 }
 
