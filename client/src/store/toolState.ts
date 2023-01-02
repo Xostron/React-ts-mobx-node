@@ -1,12 +1,28 @@
 import { makeAutoObservable } from "mobx";
+import Tool from "../components/canvas/tools/Tool";
 
 class toolState {
-    tool = null
+    tool = {} as Tool
+
+
     constructor() {
         makeAutoObservable(this)
     }
-    setTool(tool: any) {
+
+    setTool(tool: Tool) {
         this.tool = tool
+    }
+
+    setFillColor(color: string) {
+        this.tool.fillColor = color
+    }
+
+    setStrokeColor(color: string) {
+        this.tool.strokeColor = color
+    }
+
+    setLineWidth(width: number) {
+        this.tool.lineWidth = width
     }
 }
 

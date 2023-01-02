@@ -64,7 +64,7 @@ export default class Rect extends Tool implements IRect {
             this.ctx?.beginPath()
             this.ctx?.rect(x, y, w, h)
             this.ctx?.stroke()
-            // this.ctx?.fill()
+            this.ctx?.fill()
             console.log('draw rect')
         }
 

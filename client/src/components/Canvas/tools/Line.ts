@@ -4,8 +4,6 @@ import Tool from "./Tool";
 interface ILine extends Tool {
     mouseDown: boolean;
     mouseUp: boolean;
-    color: string
-    lineWidth: number
     startX: number;
     startY: number;
     saved: string;
@@ -14,23 +12,20 @@ interface ILine extends Tool {
 export default class Line extends Tool implements ILine {
     mouseDown: boolean;
     mouseUp: boolean;
-    color: string
-    lineWidth: number
     startX: number;
     startY: number;
     saved: string;
 
-    constructor(canvas: HTMLCanvasElement, color?: string, lineWidth?: number) {
+    constructor(canvas: HTMLCanvasElement) {
 
         super(canvas)
         this.listen()
         this.mouseDown = false
         this.mouseUp = false
-        this.color = color || 'black'
-        this.lineWidth = lineWidth || 1
         this.startX = 0;
         this.startY = 0;
         this.saved = ''
+
     }
 
     listen() {
@@ -46,10 +41,8 @@ export default class Line extends Tool implements ILine {
 
     mouseDownHandler(e: MouseEvent) {
         this.mouseDown = true
-        this.ctx?.beginPath()
         this.startX = e.offsetX
         this.startY = e.offsetY
-
         this.saved = this.canvas.toDataURL()
     }
 
@@ -60,10 +53,6 @@ export default class Line extends Tool implements ILine {
     }
 
     draw(x: number, y: number) {
-        if (this.ctx) {
-            this.ctx.strokeStyle = this.color
-            this.ctx.lineWidth = this.lineWidth
-        }
         const img = new Image()
         img.src = this.saved
         img.onload = () => {

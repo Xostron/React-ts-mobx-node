@@ -4,24 +4,21 @@ import Tool from "./Tool";
 interface IBrush extends Tool {
     mouseDown: boolean;
     mouseUp: boolean;
-    color: string
-    lineWidth: number
+
 }
 
 export default class Brush extends Tool implements IBrush {
     mouseDown: boolean;
     mouseUp: boolean;
-    color: string
-    lineWidth: number
 
-    constructor(canvas: HTMLCanvasElement, color?: string, lineWidth?: number) {
+
+
+    constructor(canvas: HTMLCanvasElement) {
 
         super(canvas)
         this.listen()
         this.mouseDown = false
         this.mouseUp = false
-        this.color = color || 'black'
-        this.lineWidth = lineWidth || 1
 
 
     }
@@ -50,10 +47,6 @@ export default class Brush extends Tool implements IBrush {
     }
 
     draw(x: number, y: number) {
-        if (this.ctx) {
-            this.ctx.strokeStyle = this.color
-            this.ctx.lineWidth = this.lineWidth
-        }
         this.ctx?.lineTo(x, y)
         this.ctx?.stroke()
         console.log('draw brush')

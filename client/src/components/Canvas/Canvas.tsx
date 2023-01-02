@@ -8,17 +8,22 @@ import Brush from './tools/Brush'
 export const Canvas: FC = observer(() => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null)
+
     useEffect(() => {
         if (canvasRef.current) {
-            console.log(canvasRef.current)
             canvasState.setCanvas(canvasRef.current)
             toolState.setTool(new Brush(canvasRef.current))
         }
     }, [])
 
+    const handlerUndo = () => {
+        if (canvasRef.current)
+            canvasState.pushToUndo(canvasRef.current?.toDataURL())
+    }
+
     return (
         <div className={style.container}>
-            <canvas ref={canvasRef} width={600} height={400} />
+            <canvas onMouseDown={() => { handlerUndo() }} ref={canvasRef} width={800} height={400} />
         </div>
     )
 })

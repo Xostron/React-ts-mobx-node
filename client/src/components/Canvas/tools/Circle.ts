@@ -66,7 +66,7 @@ export default class Circle extends Tool implements ICircle {
             this.ctx?.beginPath()
             this.ctx?.arc(x, y, r, 0, Math.PI * 2, false)
             this.ctx?.stroke()
-            // this.ctx?.fill()
+            this.ctx?.fill()
             console.log('draw circle')
         }
 
