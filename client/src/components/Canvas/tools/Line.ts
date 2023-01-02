@@ -1,18 +1,24 @@
 import React from "react";
 import Tool from "./Tool";
 
-interface IBrush extends Tool {
+interface ILine extends Tool {
     mouseDown: boolean;
     mouseUp: boolean;
     color: string
     lineWidth: number
+    startX: number;
+    startY: number;
+    saved: string;
 }
 
-export default class Brush extends Tool implements IBrush {
+export default class Line extends Tool implements ILine {
     mouseDown: boolean;
     mouseUp: boolean;
     color: string
     lineWidth: number
+    startX: number;
+    startY: number;
+    saved: string;
 
     constructor(canvas: HTMLCanvasElement, color?: string, lineWidth?: number) {
 
@@ -22,8 +28,9 @@ export default class Brush extends Tool implements IBrush {
         this.mouseUp = false
         this.color = color || 'black'
         this.lineWidth = lineWidth || 1
-
-
+        this.startX = 0;
+        this.startY = 0;
+        this.saved = ''
     }
 
     listen() {
@@ -40,7 +47,10 @@ export default class Brush extends Tool implements IBrush {
     mouseDownHandler(e: MouseEvent) {
         this.mouseDown = true
         this.ctx?.beginPath()
-        this.ctx?.moveTo(e.offsetX, e.offsetY)
+        this.startX = e.offsetX
+        this.startY = e.offsetY
+
+        this.saved = this.canvas.toDataURL()
     }
 
     mouseMoveHandler(e: MouseEvent) {
@@ -54,9 +64,17 @@ export default class Brush extends Tool implements IBrush {
             this.ctx.strokeStyle = this.color
             this.ctx.lineWidth = this.lineWidth
         }
-        this.ctx?.lineTo(x, y)
-        this.ctx?.stroke()
-        console.log('draw brush')
+        const img = new Image()
+        img.src = this.saved
+        img.onload = () => {
+            this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height)
+            this.ctx?.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+            this.ctx?.beginPath()
+            this.ctx?.moveTo(this.startX, this.startY)
+            this.ctx?.lineTo(x, y)
+            this.ctx?.stroke()
+            console.log('draw line')
+        }
     }
 }
 
