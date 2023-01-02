@@ -17,12 +17,6 @@ export default class Brush extends Tool implements IBrush {
         this.mouseUp = false
     }
 
-
-
-    destroyEvents(): void {
-        throw new Error("Method not implemented.");
-    }
-
     listen() {
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
@@ -30,18 +24,26 @@ export default class Brush extends Tool implements IBrush {
 
     }
 
-    mouseUpHandler(ev: MouseEvent) {
+    mouseUpHandler(e: MouseEvent) {
         this.mouseDown = false
     }
-    mouseDownHandler(ev: MouseEvent) {
+
+    mouseDownHandler(e: MouseEvent) {
         this.mouseDown = true
         this.ctx?.beginPath()
+        this.ctx?.moveTo(e.offsetX, e.offsetY)
     }
-    mouseMoveHandler(ev: MouseEvent) {
-        if (this.mouseDown) this.draw()
-    }
-    draw() {
 
+    mouseMoveHandler(e: MouseEvent) {
+        if (this.mouseDown) {
+            this.draw(e.offsetX, e.offsetY)
+        }
+    }
+
+    draw(x: number, y: number) {
+        this.ctx?.lineTo(x, y)
+        this.ctx?.stroke()
+        console.log('draw brush')
     }
 }
 
