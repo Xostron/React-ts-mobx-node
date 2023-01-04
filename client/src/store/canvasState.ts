@@ -1,13 +1,19 @@
 import { makeAutoObservable } from "mobx";
-import Tool from "../components/canvas/tools/Tool";
+
 
 class canvasState {
     canvas = {} as HTMLCanvasElement
     undoList: string[] = []
     redoList: string[] = []
+    username: string = ''
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    setUsername(username: string) {
+        this.username = username
+        console.log(username)
     }
 
     setCanvas(tool: any) {

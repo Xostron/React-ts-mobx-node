@@ -17,7 +17,7 @@ const pages = [
     },
     {
         Element: PaintPage,
-        path: '/paint',
+        path: '/paint/:id',
     }
 ]
 export default pages

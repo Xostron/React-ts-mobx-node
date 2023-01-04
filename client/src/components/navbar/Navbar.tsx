@@ -1,8 +1,9 @@
 import React, { useState, FC } from "react";
 import { ILink, LinkIcon } from "../UI/link/link-icon/LinkIcon";
 import style from './Navbar.module.scss'
-
+import { v4 as uuidv4 } from 'uuid'
 import { FiChevronUp, FiGitlab, FiX, FiMenu } from 'react-icons/fi'
+import { randomUUID } from "crypto";
 
 
 export const Navbar: FC = () => {
@@ -17,7 +18,7 @@ export const Navbar: FC = () => {
 
     const links: ILink[] = [
         { name: 'Story', to: '/', disabled: false },
-        { name: 'Paint', to: '/paint', disabled: false },
+        { name: 'Paint', to: `/paint/${uuidv4()}`, disabled: false },
         { name: 'About', to: '/about', disabled: false }
     ]
 
