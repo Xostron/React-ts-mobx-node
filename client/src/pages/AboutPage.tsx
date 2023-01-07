@@ -1,4 +1,10 @@
-import React, { FC, MouseEvent } from "react";
+import React, { FC, MouseEvent, useState } from "react";
+import style from '../style/AboutPage.module.scss'
+import logo from '../assets/landing/logo.jpg'
+import { SpinLogo } from "../components/UI/spin-logo/SpinLogo";
+
+
+
 
 export default function AboutPage() {
     const socket = new WebSocket('ws://localhost:5000/')
@@ -23,10 +29,15 @@ export default function AboutPage() {
             message: 'Hello'
         }))
     }
+
+
     return (
-        <div style={{ paddingTop: '100px' }}>
-            About
-            <button onClick={handlerSendObject}>SEND</button>
+        <div className={style.container}>
+            {/* About
+            <button onClick={handlerSendObject}>SEND</button> */}
+
+            <SpinLogo logo={logo} />
+
         </div>
     )
 }

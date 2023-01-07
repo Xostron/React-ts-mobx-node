@@ -1,0 +1,12 @@
+@import './color.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    // margin-top: 70px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}

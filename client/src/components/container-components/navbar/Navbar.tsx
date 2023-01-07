@@ -17,15 +17,15 @@ export const Navbar: FC = () => {
     }
 
     const links: ILink[] = [
-        { name: 'Story', to: '/', disabled: false },
-        { name: 'Paint', to: `/paint/${uuidv4()}`, disabled: false },
-        { name: 'About', to: '/about', disabled: false }
+        { name: 'Main', to: '/', disabled: false },
+        { name: 'Paint prj', to: `/paint/${uuidv4()}`, disabled: false },
+        { name: 'Library', to: '/about', disabled: false }
     ]
 
     return (
         <div className={style.container}>
 
-            <h2>Xostron</h2>
+            <h2>Xostron's_ Portfolio</h2>
 
             <div className={styleMenu.join(' ')}>
                 {links.map((link, idx) => <LinkIcon
