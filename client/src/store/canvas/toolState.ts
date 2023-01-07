@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import Tool from "../components/canvas/tools/Tool";
+import Tool from "../../components/canvas/tools/Tool";
 
 class toolState {
     // сохраняем объект

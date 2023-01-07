@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import pages from './routes/Routes';
-import { Navbar } from './components/navbar/Navbar';
+import { Navbar } from './components/container-components/navbar/Navbar';
 
 function App() {
   return (

@@ -1,16 +1,16 @@
 import style from './Canvas.module.scss'
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { observer } from 'mobx-react-lite'
-import canvasState from '../../store/canvasState'
-import toolState from '../../store/toolState'
-import Brush from './tools/Brush'
-import { MyModal } from "../../components/UI/modal/MyModal";
-import { FormPaint } from "../../components/canvas/FormPaint";
 import { useParams } from 'react-router-dom'
-import Rect from './tools/Rect'
-import Circle from './tools/Circle'
-import Line from './tools/Line'
-import Eraser from './tools/Eraser'
+import { observer } from 'mobx-react-lite'
+import canvasState from '../../../store/canvas/canvasState'
+import toolState from '../../../store/canvas/toolState'
+import { MyModal } from "../../../components/UI/modal/MyModal";
+import { FormPaint } from "../../../components/canvas/form/FormPaint";
+import Brush from '../tools/Brush'
+import Rect from '../tools/Rect'
+import Circle from '../tools/Circle'
+import Line from '../tools/Line'
+import Eraser from '../tools/Eraser'
 import axios from 'axios'
 import { runInThisContext } from 'vm'
 

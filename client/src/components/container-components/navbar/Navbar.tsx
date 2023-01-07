@@ -1,9 +1,9 @@
 import React, { useState, FC } from "react";
-import { ILink, LinkIcon } from "../UI/link/link-icon/LinkIcon";
+import { ILink, LinkIcon } from "../../UI/link/link-icon/LinkIcon";
 import style from './Navbar.module.scss'
 import { v4 as uuidv4 } from 'uuid'
-import { FiChevronUp, FiGitlab, FiX, FiMenu } from 'react-icons/fi'
-import { randomUUID } from "crypto";
+import { FiX, FiMenu } from 'react-icons/fi'
+
 
 
 export const Navbar: FC = () => {

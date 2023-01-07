@@ -2,13 +2,13 @@ import style from './Toolbar.module.scss'
 import React, { FC, useState, useEffect } from 'react'
 import { IoIosBrush, IoIosSquare, IoIosRadioButtonOff, IoMdUndo, IoMdRedo, IoMdSave } from 'react-icons/io'
 import { BsFillEraserFill, BsSlashLg } from "react-icons/bs";
-import toolState from '../../store/toolState';
-import Brush from './tools/Brush';
-import canvasState from '../../store/canvasState';
-import Rect from './tools/Rect';
-import Circle from './tools/Circle';
-import Line from './tools/Line';
-import Eraser from './tools/Eraser';
+import toolState from '../../../store/canvas/toolState';
+import Brush from '../tools/Brush';
+import canvasState from '../../../store/canvas/canvasState';
+import Rect from '../tools/Rect';
+import Circle from '../tools/Circle';
+import Line from '../tools/Line';
+import Eraser from '../tools/Eraser';
 
 export const Toolbar: FC = () => {
     const download = () => {

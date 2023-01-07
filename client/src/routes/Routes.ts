@@ -2,9 +2,9 @@ import React, { lazy } from "react";
 
 
 
-const MainPage = lazy(() => import('../pages/MainPage'))
+const MainPage = lazy(() => import('../pages/landing/MainPage'))
 const AboutPage = lazy(() => import('../pages/AboutPage'))
-const PaintPage = lazy(() => import('../pages/PaintPage'))
+const PaintPage = lazy(() => import('../pages/canvas/PaintPage'))
 
 const pages = [
     {

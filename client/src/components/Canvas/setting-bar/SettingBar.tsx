@@ -1,7 +1,7 @@
 import style from './SettingBar.module.scss'
 import React, { ChangeEvent, FC } from 'react'
-import toolState from '../../store/toolState'
-import canvasState from '../../store/canvasState'
+import toolState from '../../../store/canvas/toolState'
+
 
 export const SettingBar: FC = () => {
     const changeStrokeColor = (e: ChangeEvent<HTMLInputElement>) => {

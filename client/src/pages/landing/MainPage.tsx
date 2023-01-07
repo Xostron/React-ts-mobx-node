@@ -1,22 +1,19 @@
 import React, { FC } from "react";
-import { Hero } from "../components/landing/landing-start/Hero";
-import style from '../style/MainPage.module.scss'
-import iHero from '../assets/logo.jpg'
-import i1 from '../assets/1.jpg'
-import i2 from '../assets/2.jpg'
-import i3 from '../assets/3.jpg'
-import i4 from '../assets/4.png'
-import i5 from '../assets/5.jpg'
-import i6 from '../assets/6.jpg'
-import i7 from '../assets/7.jpg'
-import i8 from '../assets/8.jpg'
-import i9 from '../assets/10.jpg'
-import { ItemImg } from "../components/landing/item-img/ItemImg";
+import { Hero } from "../../components/landing/landing-start/Hero";
+import { ItemImg } from "../../components/landing/item-img/ItemImg";
+import style from '../../style/MainPage.module.scss'
+import iHero from '../../assets/landing/logo.jpg'
+import i1 from '../../assets/landing/1.jpg'
+import i2 from '../../assets/landing/2.jpg'
+import i3 from '../../assets/landing/3.jpg'
+import i4 from '../../assets/landing/4.png'
+import i5 from '../../assets/landing/5.jpg'
+import i6 from '../../assets/landing/6.jpg'
+import i7 from '../../assets/landing/7.jpg'
+import i8 from '../../assets/landing/8.jpg'
+import i9 from '../../assets/landing/10.jpg'
 
-
-
-
-export default function MainPage<FC>() {
+export default function MainPage() {
 
     return (
         <div className={style.container}>
@@ -30,7 +27,6 @@ export default function MainPage<FC>() {
             <ItemImg img={i8} title='Be better!' subtitle='Kratos and Atreus' flipped={false} />
             <ItemImg img={i3} title='Close your heart' subtitle='Old Kratos' flipped={true} />
             <ItemImg img={i9} title='Open your heart, son' subtitle='Kratos' flipped={false} />
-
         </div>
     )
 }
