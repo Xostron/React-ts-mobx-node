@@ -1,12 +1,19 @@
 import style from './SettingBar.module.scss'
 import React, { ChangeEvent, FC } from 'react'
 import toolState from '../../store/toolState'
+import canvasState from '../../store/canvasState'
 
 export const SettingBar: FC = () => {
-    const changeColor = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeStrokeColor = (e: ChangeEvent<HTMLInputElement>) => {
+        // canvasState.setStrokeColor(e.target.value)
         toolState.setStrokeColor(e.target.value)
     }
+    const changeFillColor = (e: ChangeEvent<HTMLInputElement>) => {
+        // canvasState.setFillColor(e.target.value)
+        toolState.setFillColor(e.target.value)
+    }
     const changeLineWidth = (e: ChangeEvent<HTMLInputElement>) => {
+        // canvasState.setLineWidth(+e.target.value)
         toolState.setLineWidth(+e.target.value)
     }
 
@@ -21,12 +28,21 @@ export const SettingBar: FC = () => {
                 defaultValue={1}
                 onChange={changeLineWidth}
             />
-            <label htmlFor='color'>Цвет контура</label>
+
+            <label htmlFor='stroke-color'>Цвет контура</label>
             <input
-                id='color'
+                id='stroke-color'
                 type={'color'}
                 className={style.btn_icon}
-                onChange={changeColor}
+                onChange={changeStrokeColor}
+            />
+
+            <label htmlFor='fill-color'>Цвет заливки</label>
+            <input
+                id='fill-color'
+                type={'color'}
+                className={style.btn_icon}
+                onChange={changeFillColor}
             />
         </div>
     )

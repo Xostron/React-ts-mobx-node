@@ -1,19 +1,43 @@
 import { makeAutoObservable } from "mobx";
 
 
+
 class canvasState {
     canvas = {} as HTMLCanvasElement
+    socket: WebSocket | null = null
+    sessionid: string = ''
     undoList: string[] = []
     redoList: string[] = []
     username: string = ''
+    // fillColor = '#000000'
+    // strokeColor = '#000000'
+    // lineWidth = 1
 
     constructor() {
         makeAutoObservable(this)
     }
 
+    // setFillColor(color: string) {
+    //     this.fillColor = color
+    // }
+
+    // setStrokeColor(color: string) {
+    //     this.strokeColor = color
+    // }
+
+    // setLineWidth(width: number) {
+    //     this.lineWidth = width
+    // }
+    setSessionid(id: string) {
+        this.sessionid = id
+    }
+
+    setSocket(socket: WebSocket) {
+        this.socket = socket
+    }
+
     setUsername(username: string) {
         this.username = username
-        console.log(username)
     }
 
     setCanvas(tool: any) {
@@ -22,7 +46,6 @@ class canvasState {
 
     pushToUndo(data: string) {
         this.undoList.push(data)
-        // console.log('arr undo = ', this.undoList)
     }
     pushToRedo(data: string) {
         this.redoList.push(data)

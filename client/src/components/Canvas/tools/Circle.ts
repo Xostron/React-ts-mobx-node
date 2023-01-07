@@ -7,6 +7,7 @@ interface ICircle extends Tool {
     startX: number;
     startY: number;
     saved: string;
+    radius: number;
 }
 
 export default class Circle extends Tool implements ICircle {
@@ -15,16 +16,18 @@ export default class Circle extends Tool implements ICircle {
     startX: number;
     startY: number;
     saved: string;
+    radius: number;
 
-
-    constructor(canvas: HTMLCanvasElement) {
-        super(canvas)
+    constructor(canvas: HTMLCanvasElement, socket: WebSocket, id: string,
+        fillColor: string, strokeColor: string, lineWidth: number) {
+        super(canvas, socket, id, fillColor, strokeColor, lineWidth)
         this.listen()
         this.mouseDown = false
         this.mouseUp = false
         this.startX = 0;
         this.startY = 0;
         this.saved = ''
+        this.radius = 0
     }
 
     listen() {
@@ -35,6 +38,20 @@ export default class Circle extends Tool implements ICircle {
 
     mouseUpHandler(e: MouseEvent) {
         this.mouseDown = false
+
+        this.socket.send(JSON.stringify({
+            method: 'draw',
+            id: this.id,
+            figure: {
+                type: 'circle',
+                x: this.startX,
+                y: this.startY,
+                radius: this.radius,
+                fillcolor: this.fillColor,
+                strokecolor: this.strokeColor,
+                linewidth: this.lineWidth
+            }
+        }))
     }
 
     mouseDownHandler(e: MouseEvent) {
@@ -52,8 +69,8 @@ export default class Circle extends Tool implements ICircle {
             let currentY = e.offsetY
             let width = currentX - this.startX
             let height = currentY - this.startY
-            let radius = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2))
-            this.draw(this.startX, this.startY, radius)
+            this.radius = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2))
+            this.draw(this.startX, this.startY, this.radius)
         }
     }
 
@@ -63,13 +80,30 @@ export default class Circle extends Tool implements ICircle {
         img.onload = () => {
             this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height)
             this.ctx?.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+            if (this.ctx) {
+                this.ctx.fillStyle = this.fillColor || 'black'
+                this.ctx.strokeStyle = this.strokeColor || 'black'
+                this.ctx.lineWidth = this.lineWidth || 1
+            }
             this.ctx?.beginPath()
             this.ctx?.arc(x, y, r, 0, Math.PI * 2, false)
             this.ctx?.stroke()
             this.ctx?.fill()
             console.log('draw circle')
         }
+    }
 
+    static staticDraw(ctx: CanvasRenderingContext2D, x: number, y: number,
+        r: number, fillColor: string, strokeColor: string, lineWidth: number) {
+        ctx.fillStyle = fillColor
+        ctx.strokeStyle = strokeColor
+        ctx.lineWidth = lineWidth
+        ctx.beginPath()
+        ctx.arc(x, y, r, 0, Math.PI * 2, false)
+        ctx.stroke()
+        ctx.fill()
+        ctx.beginPath()
+        console.log('server: draw circle')
     }
 }
 

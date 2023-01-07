@@ -11,18 +11,27 @@ import Line from './tools/Line';
 import Eraser from './tools/Eraser';
 
 export const Toolbar: FC = () => {
-
-    const changeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-        toolState.setFillColor(e.target.value)
+    const download = () => {
+        const imgData = canvasState.canvas.toDataURL()
+        const link = document.createElement('a')
+        link.href = imgData
+        link.download = canvasState.sessionid + '.jpg'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
     }
-
     return (
         <div className={style.container}>
 
             <div className={style.btn_left}>
                 <IoIosBrush
                     onClick={() => {
-                        canvasState.canvas && toolState.setTool(new Brush(canvasState.canvas))
+                        canvasState.canvas && canvasState.socket &&
+                            toolState.tool.fillColor && toolState.tool.strokeColor &&
+                            toolState.tool.lineWidth &&
+                            toolState.setTool(new Brush(canvasState.canvas, canvasState.socket,
+                                canvasState.sessionid, toolState.tool.fillColor, toolState.tool.strokeColor,
+                                toolState.tool.lineWidth))
                     }
                     }
                     className={style.btn_icon}
@@ -30,40 +39,56 @@ export const Toolbar: FC = () => {
 
                 <IoIosSquare
                     onClick={() => {
-                        canvasState.canvas && toolState.setTool(new Rect(canvasState.canvas))
+                        canvasState.canvas && canvasState.socket &&
+                            toolState.tool.fillColor && toolState.tool.strokeColor &&
+                            toolState.tool.lineWidth &&
+                            toolState.setTool(new Rect(canvasState.canvas, canvasState.socket,
+                                canvasState.sessionid, toolState.tool.fillColor, toolState.tool.strokeColor,
+                                toolState.tool.lineWidth))
                     }}
                     className={style.btn_icon}
                 />
 
                 <IoIosRadioButtonOff
                     onClick={() => {
-                        canvasState.canvas && toolState.setTool(new Circle(canvasState.canvas))
+                        canvasState.canvas && canvasState.socket &&
+                            toolState.tool.fillColor && toolState.tool.strokeColor &&
+                            toolState.tool.lineWidth &&
+                            toolState.setTool(new Circle(canvasState.canvas, canvasState.socket,
+                                canvasState.sessionid, toolState.tool.fillColor, toolState.tool.strokeColor,
+                                toolState.tool.lineWidth))
                     }}
                     className={style.btn_icon}
                 />
                 <BsFillEraserFill
                     onClick={() => {
-                        canvasState.canvas && toolState.setTool(new Eraser(canvasState.canvas))
+                        canvasState.canvas && canvasState.socket &&
+                            toolState.tool.fillColor && toolState.tool.strokeColor &&
+                            toolState.tool.lineWidth &&
+                            toolState.setTool(new Eraser(canvasState.canvas, canvasState.socket,
+                                canvasState.sessionid, toolState.tool.fillColor, toolState.tool.strokeColor,
+                                toolState.tool.lineWidth))
                     }}
                     className={style.btn_icon}
                 />
                 <BsSlashLg
                     onClick={() => {
-                        canvasState.canvas && toolState.setTool(new Line(canvasState.canvas))
+                        canvasState.canvas && canvasState.socket &&
+                            toolState.tool.fillColor && toolState.tool.strokeColor &&
+                            toolState.tool.lineWidth &&
+                            toolState.setTool(new Line(canvasState.canvas, canvasState.socket,
+                                canvasState.sessionid, toolState.tool.fillColor, toolState.tool.strokeColor,
+                                toolState.tool.lineWidth))
                     }}
                     className={style.btn_icon}
                 />
-                <input
-                    type={'color'}
-                    className={style.btn_icon}
-                    onChange={changeColor}
-                />
+
             </div>
 
             <div className={style.btn_right}>
                 <IoMdUndo onClick={() => { canvasState.undo() }} className={style.btn_icon} />
                 <IoMdRedo onClick={() => { canvasState.redo() }} className={style.btn_icon} />
-                <IoMdSave onClick={() => { }} className={style.btn_icon} />
+                <IoMdSave onClick={() => { download() }} className={style.btn_icon} />
             </div>
         </div>
     )
