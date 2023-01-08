@@ -12,12 +12,14 @@ import i6 from '../../assets/landing/6.jpg'
 import i7 from '../../assets/landing/7.jpg'
 import i8 from '../../assets/landing/8.jpg'
 import i9 from '../../assets/landing/10.jpg'
+import { GithubUser } from "../../components/landing/guthub-user/GithubUser";
 
 export default function MainPage() {
 
     return (
         <div className={style.container}>
             <Hero img={iHero} />
+            <GithubUser user={'xostron'} />
             <ItemImg img={i1} title='Boy!' subtitle='Kratos' flipped={false} />
             <ItemImg img={i2} title='I caught a deer' subtitle='Kratos & Atreus' flipped={true} />
             <ItemImg img={i4} title='Hrrr...' subtitle='Gharm' flipped={false} />
