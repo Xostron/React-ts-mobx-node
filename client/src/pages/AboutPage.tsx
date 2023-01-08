@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useState } from "react";
+import React, { FC, MouseEvent, useState, useEffect } from "react";
 import style from '../style/AboutPage.module.scss'
 import logo from '../assets/landing/logo.jpg'
 import { SpinLogo } from "../components/UI/spin-logo/SpinLogo";
@@ -6,38 +6,73 @@ import { SpinLogo } from "../components/UI/spin-logo/SpinLogo";
 
 
 
-export default function AboutPage() {
-    const socket = new WebSocket('ws://localhost:5000/')
-    socket.onopen = () => {
-        socket.send(JSON.stringify({
-            id: '100',
-            method: 'connection',
-            username: 'xostron',
-        }))
+const AboutPage: FC = () => {
+
+    const [thenData, setThenData] = useState()
+    const [awaitData, setAwaitData] = useState()
+    const [avatar, setAvatar] = useState()
+    // get запрос
+    const getUserGit = async () => {
+        try {
+            const response = await fetch('https://api.github.com/users/xostron')
+            const data = await response.json()
+            setAwaitData(data)
+        } catch (e) {
+            console.error(e)
+        }
     }
-    socket.onmessage = (ev: MessageEvent<any>) => {
-        console.log('from server: ', ev.data)
-    }
-    const handlerSend = (e: MouseEvent<HTMLButtonElement>) => {
-        socket.send('client: кнопка нажата')
-    }
-    const handlerSendObject = (e: MouseEvent<HTMLButtonElement>) => {
-        socket.send(JSON.stringify({
-            id: '100',
-            method: 'message',
-            username: 'xostron',
-            message: 'Hello'
-        }))
+    // post запрос 
+    // JSON.stringify - преобразует объект в json строку
+    const postData = async (username: string, id: string, bio: string) => {
+        await fetch('url', {
+            method: 'POST',
+            body: JSON.stringify({ username, id, bio })
+        })
     }
 
+    // post запрос файлов - Объекты FormData всегда отсылаются с заголовком 
+    // Content-Type: multipart/form-data, этот способ 
+    // кодировки позволяет отсылать файлы.
+    const postFile = async () => {
+        const formData = new FormData()
+        formData.append('username', 'xostron')
+        formData.append('bio', 'frontend-developer')
+        formData.append('avatar', logo, 'avatar.jpg')
+        await fetch('url', {
+            method: 'POST',
+            body: formData
+        })
+    }
+
+
+    // запрос данных о пользователе
+    useEffect(() => {
+        // связывание функций .then запросом
+        fetch('https://api.github.com/users/xostron')
+            .then(response => response.json())
+            .then(result => {
+                setThenData(result)
+            })
+            .catch(console.error)
+
+        // функция async-await
+        getUserGit()
+    }, [])
+
+    useEffect(() => {
+        console.log('thenData=', thenData)
+        console.log('awaitData = ', awaitData)
+
+
+    }, [awaitData])
 
     return (
         <div className={style.container}>
-            {/* About
-            <button onClick={handlerSendObject}>SEND</button> */}
 
-            <SpinLogo logo={logo} />
+            <pre>{JSON.stringify(awaitData, null, 2)}</pre>
 
         </div>
     )
 }
+
+export default AboutPage
