@@ -58,7 +58,6 @@ export const GithubUser: FC<IPGithubUser> = ({ user }) => {
     }, [])
 
 
-
     return (
         <>
             {loading && <>Loading...</>}
