@@ -1,7 +1,6 @@
 import style from './FormPaint.module.scss'
 import React, { FC, useRef } from 'react'
 import { InputText } from '../../UI/input/input-text/InputText'
-import { IInputText } from '../../UI/input/input-text/InputText'
 import { BtnText } from '../../UI/button/btn-text/BtnText'
 import canvasState from '../../../store/canvas/canvasState'
 

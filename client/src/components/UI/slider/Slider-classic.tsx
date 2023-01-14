@@ -10,6 +10,8 @@ interface IPropsSliderCl {
 
 
 export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
+    const refContainer: React.LegacyRef<HTMLDivElement> = useRef(null)
+    const refChildren: React.LegacyRef<HTMLDivElement> = useRef(null)
     // текущий слайд
     const [current, setCurrent] = useState<number>(1)
     // антидребезг
@@ -23,7 +25,10 @@ export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
     }, [])
 
     // ширина контейнера
-    let OFFSET_WIDTH = - (document.querySelector(`.${style.container}`)?.clientWidth || 0)
+    // 1 способ querySelector
+    // let OFFSET_WIDTH = - (document.querySelector(`.${style.container}`)?.clientWidth || 0)
+    // 2 способ useRef
+    let OFFSET_WIDTH = - (refContainer.current?.clientWidth || 0)
     // назад
     const backHandler = () => {
         setLoading(true)
@@ -31,8 +36,11 @@ export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
             setCurrent((current) => {
                 let pos = 0
                 if (current > 0) {
-                    let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
-                    if (refChildren) refChildren.style.transitionDuration = '.5s';
+                    // 1 способ querySelector
+                    // let refChildren1 = document.querySelector<HTMLElement>(`.${style.children}`)
+                    // if (refChildren1) refChildren1.style.transitionDuration = '.5s';
+                    // 2 способ useRef
+                    if (refChildren.current) { refChildren.current.style.transitionDuration = '.5s' }
                     pos = current - 1
                 }
                 else {
@@ -49,8 +57,9 @@ export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
             setCurrent((current) => {
                 let pos = 0
                 if (current <= Children.count(children)) {
-                    let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
-                    if (refChildren) refChildren.style.transitionDuration = '.5s';
+                    // let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
+                    // if (refChildren) refChildren.style.transitionDuration = '.5s';
+                    if (refChildren.current) { refChildren.current.style.transitionDuration = '.5s' }
                     pos = current + 1
                 }
                 else {
@@ -67,14 +76,16 @@ export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
             setLoading(false)
             if (current < 1) {
                 console.log(current)
-                let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
-                if (refChildren) refChildren.style.transitionDuration = '0s';
+                // let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
+                // if (refChildren) refChildren.style.transitionDuration = '0s';
+                if (refChildren.current) { refChildren.current.style.transitionDuration = '.0s' }
                 setCurrent(item.length)
             }
             if (current > Children.count(children)) {
                 console.log(current)
-                let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
-                if (refChildren) refChildren.style.transitionDuration = '0s';
+                // let refChildren = document.querySelector<HTMLElement>(`.${style.children}`)
+                // if (refChildren) refChildren.style.transitionDuration = '0s';
+                if (refChildren.current) { refChildren.current.style.transitionDuration = '.0s' }
                 setCurrent(1)
             }
         }
@@ -91,8 +102,9 @@ export const SliderClassic: FC<IPropsSliderCl> = ({ children }) => {
                 className={style.arrow}
                 onClick={backHandler}
             />
-            <div className={style.container}>
+            <div className={style.container} ref={refContainer}>
                 <div
+                    ref={refChildren}
                     id="slider-item"
                     className={style.children}
                     style={{ transform: `translateX(${OFFSET_WIDTH * current}px)` }}
