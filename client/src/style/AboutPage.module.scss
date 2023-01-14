@@ -5,8 +5,16 @@
     flex-direction: column;
     row-gap: 16px;
     padding-top: 70px;
-    // justify-content: center;
+    justify-content: center;
     align-items: center;
     height: 100vh;
 
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    height: 100%;
 }
